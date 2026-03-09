@@ -7,7 +7,7 @@ pipeline {
             steps {
                 echo "Cloning repository..."
                 git branch: 'main',
-                    url: 'https://github.com/kgurindagunta/SeleniumE2EJenkinsDocker.git'
+                    url: 'https://github.com/kgurindagunta/DevopsAutomationSelenium.git'
             }
         }
 
