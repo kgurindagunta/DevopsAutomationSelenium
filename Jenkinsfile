@@ -14,7 +14,7 @@ pipeline {
         stage('Build & Run Tests') {
             steps {
                 echo "Running Maven build and TestNG tests..."
-                sh 'mvn clean test'
+                sh 'mvn test -Dheadless=yes'
             }
         }
 
