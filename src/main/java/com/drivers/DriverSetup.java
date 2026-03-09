@@ -15,7 +15,7 @@ public class DriverSetup {
 	
 	public static void  initDriver() {
 		
-		String isHeadless = System.setProperty("headless", "no");
+		String isHeadless = System.getProperty("headless", "no");
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless=new");   // REQUIRED
 		options.addArguments("--no-sandbox");
