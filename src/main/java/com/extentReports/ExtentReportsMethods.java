@@ -57,13 +57,18 @@ public class ExtentReportsMethods {
 		extent.flush();
 		ExtentManager.removeExtentTest();
 	//	Desktop.getDesktop().browse(new File(FrameworkConstants.getExpentPath()).toURI());
-		try {
-			//Desktop.getDesktop().browse(new File(System.getProperty("user.dir")+"/extent-output "+dynamicDate).toURI());
-			Desktop.getDesktop().browse(new File(reportDir + "\\index.html").toURI());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		String osName = System.getProperty("os.name").toLowerCase();
+		if(osName.contains("win")) {
+			try {
+				//Desktop.getDesktop().browse(new File(System.getProperty("user.dir")+"/extent-output "+dynamicDate).toURI());
+				Desktop.getDesktop().browse(new File(reportDir + "\\index.html").toURI());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 	}
 	
 	public static void createExtentTest(String testname) {
