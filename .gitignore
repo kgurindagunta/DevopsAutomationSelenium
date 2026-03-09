@@ -1,0 +1,8 @@
+# Maven build output
+target/
+
+# TestNG default reports
+test-output/
+
+# Extent Reports
+TestReports/
