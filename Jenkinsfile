@@ -28,14 +28,13 @@ pipeline {
 
         stage('Publish Extent Report') {
             steps {
-                echo "Publishing Extent HTML Report..."
                 publishHTML([
                     reportDir: 'TestReports',
                     reportFiles: '**/index.html',
                     reportName: 'Extent Automation Report',
                     keepAll: true,
                     alwaysLinkToLastBuild: true,
-                    allowMissing: true
+                    allowMissing: false
                 ])
             }
         }
@@ -47,14 +46,14 @@ pipeline {
         }
 
         success {
-            emailext (
+            emailext(
                 subject: "✅ Jenkins Build Successful - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
                 <h2 style='color:green;'>Build Passed</h2>
                 <p><b>Project:</b> ${env.JOB_NAME}</p>
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
                 <p>
-                  View the 
+                  View the
                   <a href="${env.BUILD_URL}Extent%20Automation%20Report/">
                     Extent Automation Report
                   </a>
@@ -66,17 +65,17 @@ pipeline {
         }
 
         failure {
-            emailext (
+            emailext(
                 subject: "❌ Jenkins Build Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
                 <h2 style='color:red;'>Build Failed</h2>
                 <p><b>Project:</b> ${env.JOB_NAME}</p>
                 <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
                 <p>
-                  Check the 
+                  Check the
                   <a href="${env.BUILD_URL}console">
                     Jenkins Console Logs
-                  </a>
+                  </a>.
                 </p>
                 """,
                 to: "gurindaguntakiran@gmail.com",
