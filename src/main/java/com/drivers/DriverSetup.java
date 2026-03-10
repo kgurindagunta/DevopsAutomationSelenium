@@ -29,7 +29,7 @@ public class DriverSetup {
 		if(isHeadless.equals("yes") && isRemoteDriver.equalsIgnoreCase("no")) {
 		 driver = new ChromeDriver(options);	
 		}
-		else if(isRemoteDriver.equalsIgnoreCase("yes") && isRemoteDriver.equalsIgnoreCase("yes")) {
+		else if(isHeadless.equals("yes") && isRemoteDriver.equalsIgnoreCase("yes")) {
 			try {
 				driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
 			} catch (MalformedURLException e) {
