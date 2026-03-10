@@ -5,7 +5,6 @@ networks:
     driver: bridge
 
 services:
-
   selenium-hub:
     image: selenium/hub:latest
     container_name: selenium-hub
@@ -48,8 +47,8 @@ services:
       - selenium-hub
     networks:
       - grid
-	environment:
-	  - remoteDriver=yes
-	  - headless=yes  
+    environment:
+      - remoteDriver=yes
+      - headless=yes
     volumes:
       - ./TestReports:/app/TestReports
