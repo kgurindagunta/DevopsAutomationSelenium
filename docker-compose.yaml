@@ -48,5 +48,8 @@ services:
       - selenium-hub
     networks:
       - grid
+	environment:
+	  - remoteDriver=yes
+	  - headless=yes  
     volumes:
       - ./TestReports:/app/TestReports
