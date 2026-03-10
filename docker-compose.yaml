@@ -15,7 +15,7 @@ services:
       - grid
 
   chrome:
-    image: selenium/node-chrome:114.0-slim
+    image: selenium/node-chrome:latest
     shm_size: "2gb"
     depends_on:
       - selenium-hub
@@ -29,7 +29,7 @@ services:
       - grid
 
   firefox:
-    image: selenium/node-firefox:114.0-slim
+    image: selenium/node-firefox:latest
     shm_size: "2gb"
     depends_on:
       - selenium-hub
