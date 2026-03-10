@@ -17,7 +17,7 @@ public class DriverSetup {
 	}
 	
 	
-	public static void  initDriver() throws MalformedURLException {
+	public static void  initDriver()  {
 		
 		String isHeadless = System.getProperty("headless", "no");
 		String isRemoteDriver = System.getProperty("remoteDriver","no");
@@ -30,7 +30,12 @@ public class DriverSetup {
 		 driver = new ChromeDriver(options);	
 		}
 		else if(isRemoteDriver.equalsIgnoreCase("yes")) {
-			driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
+			try {
+				driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else {
 			driver = new ChromeDriver();	
