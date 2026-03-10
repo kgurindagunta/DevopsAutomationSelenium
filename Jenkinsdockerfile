@@ -1,0 +1,55 @@
+pipeline {
+agent any
+
+
+stages {
+
+    stage('Checkout from GitHub') {
+        steps {
+            echo "Cloning repository..."
+            git branch: 'main',
+                url: 'https://github.com/kgurindagunta/DevopsAutomationSelenium.git'
+        }
+    }
+
+    stage('Run Selenium Grid & Tests') {
+        steps {
+            echo "Starting Selenium Grid and running tests in Docker..."
+
+            sh '''
+            docker-compose down || true
+            docker-compose up --build --scale chrome=4 --scale firefox=4 --abort-on-container-exit
+            '''
+        }
+    }
+
+    stage('Archive Extent Reports') {
+        steps {
+            archiveArtifacts artifacts: 'TestReports/**',
+                             allowEmptyArchive: true
+        }
+    }
+
+    stage('Publish Extent Report') {
+        steps {
+            publishHTML([
+                reportDir: 'TestReports',
+                reportFiles: '**/index.html',
+                reportName: 'Extent Automation Report',
+                keepAll: true,
+                alwaysLinkToLastBuild: true,
+                allowMissing: false
+            ])
+        }
+    }
+}
+
+post {
+    always {
+        echo "Stopping Docker containers..."
+        sh 'docker-compose down'
+        echo "Build completed."
+    }
+}
+
+}

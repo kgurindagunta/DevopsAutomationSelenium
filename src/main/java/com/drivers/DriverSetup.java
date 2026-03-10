@@ -1,8 +1,12 @@
 package com.drivers;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class DriverSetup {
 	
@@ -13,9 +17,10 @@ public class DriverSetup {
 	}
 	
 	
-	public static void  initDriver() {
+	public static void  initDriver() throws MalformedURLException {
 		
 		String isHeadless = System.getProperty("headless", "no");
+		String isRemoteDriver = System.getProperty("remoteDriver","no");
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless=new");   // REQUIRED
 		options.addArguments("--no-sandbox");
@@ -23,6 +28,9 @@ public class DriverSetup {
 		options.addArguments("--window-size=1920,1080");
 		if(isHeadless.equals("yes")) {
 		 driver = new ChromeDriver(options);	
+		}
+		else if(isRemoteDriver.equalsIgnoreCase("yes")) {
+			driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
 		}
 		else {
 			driver = new ChromeDriver();	
