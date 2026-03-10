@@ -18,7 +18,7 @@ stages {
 
             sh '''
             docker-compose down || true
-            docker-compose up --build --scale chrome=2 --scale firefox=2 --abort-on-container-exit
+            docker-compose up --build --scale chrome=1 --scale firefox=1 --abort-on-container-exit
             '''
         }
     }
