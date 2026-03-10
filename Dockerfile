@@ -6,4 +6,4 @@ COPY . .
 
 RUN mvn dependency:resolve
 
-CMD ["mvn","test","-Dheadless=yes"]
+CMD ["mvn","test","-Dheadless=yes","-DremoteDriver=yes"]
